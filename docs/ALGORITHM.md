@@ -4,7 +4,7 @@
 
 Each known microphone is a first-order Ambisonic signal ordered as `[W, Y, Z, X]`. Microphone yaw rotates local FOA directions into the common global frame before spatial analysis.
 
-The model domain operates at 16 kHz with a 512-sample STFT and 128-sample hop.
+The model domain operates at **16 kHz** with a 512-sample STFT and 128-sample hop.
 
 ## DirAC analysis
 
@@ -20,13 +20,13 @@ The triangle containing the query is selected. Its three barycentric weights are
 
 For weights `g_m`:
 
-```text
-E_hat   = sum_m g_m E_m
-v_hat   = sum_m g_m (i_m / E_m)
-        = sum_m g_m (1 - psi_m) u_m
-psi_hat = 1 - ||v_hat||
-u_hat   = v_hat / ||v_hat||    when ||v_hat|| > 0
-```
+$\hat{E}   = \sum_m{g_m E_m}$
+
+$\hat{\bf{v}}   = \sum_m{g_m \frac{\bf{i}_m}{E_m}} = \sum_m{g_m (1 - \psi _m) \bf{u}_m}$
+
+$\hat{\psi} = 1 - \lVert\hat{\bf{v}}\rVert$
+
+$\hat{\bf{u}}   = \frac{\hat{\bf{v}}} {\lVert\hat{\bf{v}}\rVert} \quad \quad   when \quad \lVert\hat{\bf{v}}\rVert > 0$
 
 This is intentionally different from directly averaging diffuseness.
 
@@ -44,13 +44,18 @@ Pure Delaunay mode uses the FOA recording from the microphone nearest to the act
 
 Reference:
 
-A. Politis, L. Pajunen, J. Leppänen, S. Mate, A. Eronen, “Wide-Area 6DoF Rendering of Multi-Point Ambisonic Recordings Based on Interpolation of Spatial Parameters,” WASPAA 2023, DOI: 10.1109/WASPAA58266.2023.10248142.
+> A. Politis, L. Pajunen, J. Leppänen, S. Mate, A. Eronen, “Wide-Area 6DoF Rendering of Multi-Point Ambisonic Recordings Based on Interpolation of Spatial Parameters,” *WASPAA 2023*, DOI: [10.1109/WASPAA58266.2023.10248142](ieeexplore.ieee.org/document/10248142/).
+
 
 ## GNN learned path
 
 The learned renderer forms a complete directed graph over `N` known microphone nodes and one query node.
 
-The embedded network uses two message-passing stages with hidden dimension 48. Node and edge features combine spatial coordinates with DirAC-like acoustic descriptors. A shared readout predicts positive interpolation weights for known nodes.
+The embedded network uses two message-passing stages with hidden dimension 48. Node and edge features, respectively $\bf{h}^{(\ell)}_n$ and $\bf{x}^e_{n,m}$,  combine spatial coordinates with DirAC-like acoustic descriptors. A shared readout predicts positive interpolation weights for known nodes.
+
+<p align="center">
+    <img src="images/pipeline.png" alt="alt text">
+</p>
 
 The model may assign non-zero weight to any active known microphone. Relative learned ratios are retained. If the raw positive weights sum to `S`, the live interface applies:
 
