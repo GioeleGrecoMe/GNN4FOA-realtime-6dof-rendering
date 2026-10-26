@@ -51,8 +51,8 @@ Reference:
 
 The learned renderer forms a complete directed graph over `N` known microphone nodes and one query node.
 
-The embedded network uses two message-passing stages with hidden dimension 48. Node and edge features, respectively
-${\mathbf{h}^{(\ell)}_{n}}$ and ${\mathbf{x}^e_{n,m}}$,  combine spatial coordinates with DirAC-like acoustic descriptors. A shared readout predicts positive interpolation weights for known nodes.
+The embedded network uses two message-passing stages with hidden dimension 48. Node and edge features, respectively, 
+<b><i>h</i></b><sup>(ℓ)</sup><sub><i>n</i></sub> and <b><i>x</i></b><sup><i>e</i></sup><sub><i>n,m</i></sub> combine spatial coordinates with DirAC-like acoustic descriptors. A shared readout predicts positive interpolation weights for known nodes.
 
 <p align="center">
     <img src="images/pipeline.png" alt="Pipeline">
