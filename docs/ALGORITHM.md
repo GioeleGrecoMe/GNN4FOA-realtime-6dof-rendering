@@ -55,7 +55,7 @@ The embedded network uses two message-passing stages with hidden dimension 48. N
 <b><i>h</i></b><sup>(ℓ)</sup><sub><i>n</i></sub> and <b><i>x</i></b><sup><i>e</i></sup><sub><i>n,m</i></sub> combine spatial coordinates with DirAC-like acoustic descriptors. A shared readout predicts positive interpolation weights for known nodes.
 
 <p align="center">
-    <img src="images/pipeline.png" alt="Pipeline">
+    <img src="images/Pipeline.png" alt="Pipeline">
 </p>
 
 The model may assign non-zero weight to any active known microphone. Relative learned ratios are retained. If the raw positive weights sum to `S`, the live interface applies:
