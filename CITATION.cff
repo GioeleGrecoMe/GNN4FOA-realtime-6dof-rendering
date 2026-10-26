@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use GNN4FOA in research, please cite this software and the associated publication for the method you evaluate."
+title: "GNN4FOA"
+type: software
+version: "2.0.0"
+date-released: 2026-09-01
+authors:
+  - family-names: Greco
+    given-names: Gioele
+    affiliation: "ISPL, Politecnico di Milano"
+  - family-names: Marri
+    given-names: Filippo
+    affiliation: "ISPL, Politecnico di Milano"
+  - family-names: Pezzoli
+    given-names: Mirco
+    affiliation: "ISPL, Politecnico di Milano"
+  - family-names: Antonacci
+    given-names: Fabio
+    affiliation: "ISPL, Politecnico di Milano"
+url: "https://ispl.deib.polimi.it/"
+keywords:
+  - spatial audio
+  - ambisonics
+  - FOA
+  - graph neural network
+  - DirAC
+  - sound field reconstruction
