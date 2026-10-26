@@ -1,6 +1,10 @@
-# GNN4FOA v2
+<p align="center">
+    <img src="docs/images/GNN4FOA.png" alt="alt text">
+</p>
 
-**Real-time 2-D FOA sound-field reconstruction from multiple Ambisonic recordings, using either a paper-faithful DirAC/Delaunay baseline or a learned Graph Neural Network.**
+# 
+
+**Real-time 2-D FOA sound-field reconstruction from multiple Ambisonic recordings, using either a paper-faithful DirAC-Delaunay baseline or a learned Graph Neural Network.**
 
 Developed at the **Image and Sound Processing Lab (ISPL), Politecnico di Milano**.
 
@@ -12,8 +16,8 @@ GNN4FOA is a JUCE audio plug-in for reconstructing a first-order Ambisonic (FOA)
 
 The plug-in exposes two reconstruction modes:
 
-- **Delaunay Baseline** — local DirAC parameter interpolation based on a 2-D Delaunay triangulation. Inside the measurement region, only the three microphones forming the triangle that contains the query position are used. Outside the region, the query is projected to the closest triangulation boundary. The waveform/phase prototype is taken from the closest FOA microphone.
-- **GNN Learned** — a graph neural network that uses all manually active FOA nodes and their spatial/acoustic features to predict positive interpolation weights. The relative learned ratios are preserved, while the total learned weight sum is constrained to **[0.5, 2.0]**.
+- **Delaunay Baseline**: local DirAC parameter interpolation based on a 2-D Delaunay triangulation. Inside the measurement region, only the three microphones forming the triangle that contains the query position are used. Outside the region, the query is projected to the closest triangulation boundary. The waveform/phase prototype is taken from the closest FOA microphone.
+- **GNN Learned**: a graph neural network that uses all manually active FOA nodes and their spatial/acoustic features to predict positive interpolation weights. The relative learned ratios are preserved, while the total learned weight sum is constrained to **[0.5, 2.0]**.
 
 The four reconstructed outputs remain in a **global FOA frame**. The plug-in does not perform binaural/HRTF decoding or listener-head rotation.
 
@@ -43,8 +47,12 @@ The active number of nodes is selected manually in the GUI. No host-channel auto
 
 If `N` nodes are selected, the DSP consumes exactly the first `4N` input channels. Remaining input channels are ignored.
 
-## Quick start in REAPER
+## Installation
+1. Unzip the installer.
+2. Run the `installer.command` file by double-clicking over it.
+3. Run the `verify.command` as a check.
 
+## Quick start in REAPER
 1. Create a multichannel track able to carry the required FOA signals.
 2. Route each known FOA recording to one consecutive 4-channel group using the mapping above.
 3. Insert **`GNN4FOA_v2`** on the track.
@@ -57,7 +65,6 @@ If `N` nodes are selected, the DSP consumes exactly the first `4N` input channel
 For controlled experiments, verify channel order and node positions before comparing the two interpolation modes. A wrong node-to-audio association affects the learned model especially strongly because acoustic features are part of the GNN input.
 
 ## Interface
-
 The editor is divided into a spatial map and a control/diagnostic panel.
 
 ### Spatial map
@@ -98,35 +105,34 @@ A more detailed guide is available in [`docs/GUI.md`](docs/GUI.md).
 ## Reconstruction methods
 
 ### Paper-faithful DirAC / Delaunay baseline
-
 For `N >= 3`, active microphone positions are triangulated in 2-D. For a query inside the measurement region, the single containing Delaunay triangle is selected and only its three vertices receive non-zero barycentric weights.
 
-For geometric weights `g_m`, the reconstructed spatial parameters follow:
+For geometric weights $g_m$, the reconstructed spatial parameters follow:
 
-```text
-E_hat   = sum_m g_m E_m
-v_hat   = sum_m g_m (i_m / E_m)
-        = sum_m g_m (1 - psi_m) u_m
-psi_hat = 1 - ||v_hat||
-u_hat   = v_hat / ||v_hat||    when ||v_hat|| > 0
-```
+$\hat{E}   = \sum_m{g_m E_m}$
 
-Diffuseness is therefore derived from the magnitude of the interpolated normalized-intensity vector rather than averaged directly. In pure Delaunay mode, the waveform/phase prototype is the FOA microphone closest to the query, avoiding direct phase mixing between widely spaced recordings.
+$\hat{\bf{v}}   = \sum_m{g_m \frac{\bf{i}_m}{E_m}} = \sum_m{g_m (1 - \psi _m) \bf{u}_m}$
+
+$\hat{\psi} = 1 - ||\hat{\bf{v}}||$
+
+$\hat{\bf{u}}   = \frac{\hat{\bf{v}}} {||\hat{\bf{v}}||} \quad \quad   when \quad ||\hat{\bf{v}}|| > 0$
+
+
+Diffuseness $\hat{\psi}$ is therefore derived from the magnitude of the interpolated normalized-intensity vector $\hat{\bf{v}}$ rather than averaged directly. In pure Delaunay mode, the waveform/phase prototype is the FOA microphone closest to the query, avoiding direct phase mixing between widely spaced recordings.
 
 The baseline follows:
 
-> A. Politis, L. Pajunen, J. Leppänen, S. Mate, A. Eronen, “Wide-Area 6DoF Rendering of Multi-Point Ambisonic Recordings Based on Interpolation of Spatial Parameters,” *WASPAA 2023*, DOI: `10.1109/WASPAA58266.2023.10248142`.
+> A. Politis, L. Pajunen, J. Leppänen, S. Mate, A. Eronen, “Wide-Area 6DoF Rendering of Multi-Point Ambisonic Recordings Based on Interpolation of Spatial Parameters,” *WASPAA 2023*, DOI: [10.1109/WASPAA58266.2023.10248142](ieeexplore.ieee.org/document/10248142/).
 
 See [`docs/ALGORITHM.md`](docs/ALGORITHM.md) for implementation details and the explicit N=2 extension.
 
 ### GNN learned interpolation
-
 The learned path builds a complete directed graph from the active known microphones plus the query node. It uses spatial positions together with DirAC-like acoustic descriptors and predicts positive per-node interpolation weights.
 
 Key properties of the embedded model/runtime:
 
 - up to 10 known FOA nodes + 1 query node;
-- embedded checkpoint trained with exactly five known FOA nodes; N=1..4 and N=6..10 are graph-cardinality OOD extrapolations;
+- embedded checkpoint trained with exactly five known FOA nodes; `N=1..4` and `N=6..10` are graph-cardinality OOD extrapolations;
 - message aggregation is scaled by `5/N` to preserve the training-degree magnitude;
 - two message-passing layers;
 - hidden dimension 48;
@@ -139,7 +145,6 @@ Key properties of the embedded model/runtime:
 - macOS dense matrix products through Accelerate `vDSP_mmul`.
 
 ## Sample rate and real-time architecture
-
 The model operates internally at **16 kHz** with a 512-sample STFT and 128-sample hop (125 TF frames/s). At other host sample rates, selected input FOA channels are resampled to 16 kHz before analysis and the reconstructed four-channel FOA output is converted back to the host rate.
 
 The GNN does **not** run in the DAW audio callback. A dedicated model worker performs resampling, STFT/DirAC analysis, learned inference and synthesis. The callback uses preallocated FIFO/copy operations.
@@ -215,9 +220,6 @@ Eigen headers are vendored for the GNN runtime; JUCE 9.0.1 is acquired at build 
 
 This source release intentionally does **not** invent a project-wide license on behalf of the copyright holders. Add the intended top-level license before using GitHub to grant public redistribution/modification rights.
 
-## Screenshots
-
-The public repository is prepared for real plug-in screenshots under `docs/images/`. No synthetic GUI mockups are included. See [`docs/images/README.md`](docs/images/README.md) for the recommended captures.
 
 ## Release
 

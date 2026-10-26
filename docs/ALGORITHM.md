@@ -61,15 +61,8 @@ w_applied[m] = w_raw[m] * S_target / S
 
 Therefore the learned sum is not forced to one.
 
-Low-energy bins use the Delaunay baseline as a reliability fallback. Entry occurs at the configured threshold while exit uses a 3 dB lower threshold. The actual spatial parameters are crossfaded between Delaunay and GNN over two 8 ms hops in both directions. A previously learned high-energy bin retains learned history under temporary compute pressure; fresh threshold re-entry invalidates stale learned history before reuse.
+Low-energy bins use the Delaunay baseline as a reliability fallback. A previously learned high-energy bin retains learned history under temporary compute pressure; fresh threshold re-entry invalidates stale learned history before reuse.
 
 ## Adaptive learned inference
 
 STFT/DirAC processing remains frame-synchronous. GNN inference may run at an adaptive stride according to measured model cost and output-reservoir safety. Cadence is based on processed audio/model frames rather than wall-clock time, so anticipative/offline host processing does not stretch the learned update interval relative to the audio timeline.
-
-When a bin newly enters the learned region during a normal multirate hold, only bins without fresh learned coverage are inferred. Scheduled/geometry/acoustic refreshes still update the full active learned batch. Admission predicts compute from the number of bins about to be inferred and uses a conservative recent per-bin peak for reservoir safety; tiny coverage passes do not reset or postpone the normal full-update cadence.
-
-
-## GNN cardinality
-
-The embedded checkpoint was trained with five measured FOA nodes. v2 supports N=1..10 at runtime; message aggregates are scaled by `5/N` to preserve the training-degree magnitude. Every N other than 5 is therefore an out-of-distribution graph-cardinality extrapolation and must be evaluated accordingly.
