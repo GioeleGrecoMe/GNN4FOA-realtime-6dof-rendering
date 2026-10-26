@@ -22,11 +22,11 @@ For weights `g_m`:
 
 $\hat{E}   = \sum_m{g_m E_m}$
 
-$\hat{\bf{v}}   = \sum_m{g_m \frac{\bf{i}_m}{E_m}} = \sum_m{g_m (1 - \psi _m) \bf{u}_m}$
+$\hat{\mathbf{v}}   = \sum_m{g_m \frac{\mathbf{i}_m}{E_m}} = \sum_m{g_m (1 - \psi _m) \mathbf{u}_m}$
 
-$\hat{\psi} = 1 - \lVert\hat{\bf{v}}\rVert$
+$\hat{\psi} = 1 - \lVert\hat{\mathbf{v}}\rVert$
 
-$\hat{\bf{u}}   = \frac{\hat{\bf{v}}} {\lVert\hat{\bf{v}}\rVert} \quad \quad   when \quad \lVert\hat{\bf{v}}\rVert > 0$
+$\hat{\mathbf{u}}   = \frac{\hat{\mathbf{v}}} {\lVert\hat{\mathbf{v}}\rVert} \quad \quad   when \quad \lVert\hat{\mathbf{v}}\rVert > 0$
 
 This is intentionally different from directly averaging diffuseness.
 
@@ -51,10 +51,11 @@ Reference:
 
 The learned renderer forms a complete directed graph over `N` known microphone nodes and one query node.
 
-The embedded network uses two message-passing stages with hidden dimension 48. Node and edge features, respectively ${\bf{h}^{(\ell)}_n}$ and ${\bf{x}^e_{n,m}}$,  combine spatial coordinates with DirAC-like acoustic descriptors. A shared readout predicts positive interpolation weights for known nodes.
+The embedded network uses two message-passing stages with hidden dimension 48. Node and edge features, respectively
+${\mathbf{h}^{(\ell)}_{n}}$ and ${\mathbf{x}^e_{n,m}}$,  combine spatial coordinates with DirAC-like acoustic descriptors. A shared readout predicts positive interpolation weights for known nodes.
 
 <p align="center">
-    <img src="images/pipeline.png" alt="alt text">
+    <img src="images/pipeline.png" alt="Pipeline">
 </p>
 
 The model may assign non-zero weight to any active known microphone. Relative learned ratios are retained. If the raw positive weights sum to `S`, the live interface applies:

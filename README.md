@@ -126,14 +126,14 @@ For geometric weights $g_m$, the reconstructed spatial parameters follow:
 
 $\hat{E}   = \sum_m{g_m E_m}$
 
-$\hat{\bf{v}}   = \sum_m{g_m \frac{\bf{i}_m}{E_m}} = \sum_m{g_m (1 - \psi _m) \bf{u}_m}$
+$\hat{\mathbf{v}}   = \sum_m{g_m \frac{\mathbf{i}_m}{E_m}} = \sum_m{g_m (1 - \psi _m) \mathbf{u}_m}$
 
-$\hat{\psi} = 1 - \lVert\hat{\bf{v}}\rVert$
+$\hat{\psi} = 1 - \lVert\hat{\mathbf{v}}\rVert$
 
-$\hat{\bf{u}}   = \frac{\hat{\bf{v}}} {\lVert\hat{\bf{v}}\rVert} \quad \quad   when \quad \lVert\hat{\bf{v}}\rVert > 0$
+$\hat{\mathbf{u}}   = \frac{\hat{\mathbf{v}}} {\lVert\hat{\mathbf{v}}\rVert} \quad \quad   when \quad \lVert\hat{\mathbf{v}}\rVert > 0$
 
 
-Diffuseness $\hat{\psi}$ is therefore derived from the magnitude of the interpolated normalized-intensity vector $\hat{\bf{v}}$ rather than averaged directly. In pure Delaunay mode, the waveform/phase prototype is the FOA microphone closest to the query, avoiding direct phase mixing between widely spaced recordings.
+Diffuseness $\hat{\psi}$ is therefore derived from the magnitude of the interpolated normalized-intensity vector $\hat{\mathbf{v}}$ rather than averaged directly. In pure Delaunay mode, the waveform/phase prototype is the FOA microphone closest to the query, avoiding direct phase mixing between widely spaced recordings.
 
 The baseline follows:
 
