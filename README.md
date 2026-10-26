@@ -14,18 +14,21 @@ Developed at the **Image and Sound Processing Lab (ISPL), Politecnico di Milano*
 
 GNN4FOA is a JUCE audio plug-in for reconstructing a first-order Ambisonic (FOA) signal at a movable query position from up to ten known FOA recordings measured at different positions.
 
-The plug-in exposes two reconstruction modes:
 <table>
   <tr>
     <td width="90%" valign="middle">
-      <ul>
-        <li>**Delaunay Baseline**: local DirAC parameter interpolation based on a 2-D Delaunay triangulation. Inside the measurement region, only the three microphones forming the triangle that contains the query position are used. Outside the region, the query is projected to the closest triangulation boundary. The waveform/phase prototype is taken from the closest FOA microphone.</li>
-        <newline>
-        <li>- **GNN Learned**: a graph neural network that uses all manually active FOA nodes and their spatial/acoustic features to predict positive interpolation weights. The relative learned ratios are preserved, while the total learned weight sum is constrained to **[0.5, 2.0]**.</li>
-      </ul>
+      <strong>Delaunay Baseline</strong>: local DirAC parameter interpolation based on a 2-D Delaunay triangulation. Inside the measurement region, only the three microphones forming the triangle that contains the query position are used. Outside the region, the query is projected to the closest triangulation boundary. The waveform/phase prototype is taken from the closest FOA microphone.
     </td>
-    <td width="10%" align="center">
-      <img src="docs/images/Comparing.png" width="100%">
+    <td width="10%" align="center" valign="middle">
+      <img src="docs/images/Comparing 1.png" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td width="90%" valign="middle">
+      <strong>GNN Learned</strong>: a graph neural network that uses all manually active FOA nodes and their spatial/acoustic features to predict positive interpolation weights. The relative learned ratios are preserved, while the total learned weight sum is constrained to <strong>[0.5, 2.0]</strong>.
+    </td>
+    <td width="10%" align="center" valign="middle">
+      <img src="docs/images/Comparing 2.png" width="100%">
     </td>
   </tr>
 </table>
