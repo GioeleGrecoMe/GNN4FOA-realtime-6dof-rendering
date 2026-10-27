@@ -37,15 +37,25 @@ The plug-in exposes two reconstruction modes:
 The four reconstructed outputs remain in a **global FOA frame**. The plug-in does not perform binaural/HRTF decoding or listener-head rotation.
 
 ## Installation
-### MacOs Users
-1. Unzip the installer;
-2. Run the `installer.command` file by double-clicking over it;
-3. Run the `verify.command` as a check.
+
+### macOS Users
+1. Download the [macOS Installer](GNN4FOA_v2_macOS_Installer.zip).
+2. Unzip the folder.
+3. Run the `installer.command` file by double-clicking it.
+4. Run `verify.command` to verify the installation.
+
+If macOS prevents you from running the scripts, follow these steps right after double-clicking `installer.command`:
+1. Open **System Settings**.
+2. Go to **Privacy & Security**.
+3. Scroll down to the bottom of the page.
+4. Click **Open Anyway** next to the message stating that `installer.command` was blocked for security reasons.
+
+You can follow the same steps for `verify.command`.
 
 ### Windows Users
-1. Donwload the `Source` repository;
-2. Open the repository on your IDE;
-3. Build the Plug-In.
+1. Download the [Source](Source) repository.
+2. Open the repository in your IDE.
+3. Build the plugin.
 
 ## Audio I/O
 
