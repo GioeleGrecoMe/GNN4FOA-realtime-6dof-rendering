@@ -36,6 +36,17 @@ The plug-in exposes two reconstruction modes:
 
 The four reconstructed outputs remain in a **global FOA frame**. The plug-in does not perform binaural/HRTF decoding or listener-head rotation.
 
+## Installation
+### MacOs Users
+1. Unzip the installer;
+2. Run the `installer.command` file by double-clicking over it;
+3. Run the `verify.command` as a check.
+
+### Windows Users
+1. Donwload the `Source` repository;
+2. Open the repository on your IDE;
+3. Build the Plug-In.
+
 ## Audio I/O
 
 The plug-in has a fixed host topology:
@@ -61,11 +72,6 @@ The active number of nodes is selected manually in the GUI. No host-channel auto
 | Reconstructed FOA | outputs 1–4 |
 
 If `N` nodes are selected, the DSP consumes exactly the first `4N` input channels. Remaining input channels are ignored.
-
-## Installation
-1. Unzip the installer.
-2. Run the `installer.command` file by double-clicking over it.
-3. Run the `verify.command` as a check.
 
 ## Quick start in REAPER
 1. Create a multichannel track able to carry the required FOA signals.
