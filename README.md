@@ -243,7 +243,29 @@ Dipartimento di Elettronica, Informazione e Bioingegneria
 
 Project website / lab: <https://ispl.deib.polimi.it/>
 
-See [`AUTHORS.md`](AUTHORS.md) and [`CITATION.cff`](CITATION.cff).
+
+## Citation
+
+If you use GNN4FOA or the proposed method in your research, please cite the following paper:
+
+**G. Greco, F. Marri, M. Pezzoli, and F. Antonacci**, "Graph Neural Network for Wide-Area 6DoF Ambisonic Rendering," *International Workshop on Acoustic Signal Enhancement (IWAENC)*, 2026.
+
+**Paper:** https://arxiv.org/abs/2610.35741
+
+### BibTeX
+
+```bibtex
+@misc{greco2026gnn4foa,
+  title={Graph Neural Network for Wide-Area 6DoF Ambisonic Rendering},
+  author={Greco, Gioele and Marri, Filippo and Pezzoli, Mirco and Antonacci, Fabio},
+  year={2026},
+  eprint={2610.35741},
+  archivePrefix={arXiv},
+  primaryClass={cs.SD},
+  url={https://arxiv.org/abs/2610.35741}
+}
+```
+
 
 ## Third-party software and licensing
 
