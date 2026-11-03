@@ -6,6 +6,22 @@
 
 **Real-time 2-D FOA sound-field reconstruction from multiple Ambisonic recordings, using either a paper-faithful DirAC-Delaunay baseline or a learned Graph Neural Network.**
 
+<p align="center">
+  <img
+    src="docs/assets/gnn4foa-demo.gif"
+    alt="GNN4FOA - Real-time 6DoF spatial audio rendering through a virtual acoustic twin"
+    width="900"
+  />
+</p>
+
+<p align="center">
+  <em>
+    From sparse FOA recordings to real-time,
+    listener-adaptive spatial audio rendering.
+  </em>
+</p>
+
+
 Developed at the **Image and Sound Processing Lab (ISPL), Politecnico di Milano**.
 
 **Authors:** Gioele Greco, Filippo Marri, Mirco Pezzoli, Fabio Antonacci
