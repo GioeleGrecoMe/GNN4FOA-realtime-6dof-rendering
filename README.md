@@ -4,7 +4,7 @@
 
 # 
 
-**Real-time 2-D FOA sound-field reconstruction from multiple Ambisonic recordings, using either a paper-faithful DirAC-Delaunay baseline or a learned Graph Neural Network.**
+**Real-time 6-DOF FOA sound-field reconstruction from multiple Ambisonic recordings using a learned Graph Neural Network.**
 
 <p align="center">
   <img
