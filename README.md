@@ -8,7 +8,7 @@
 
 <p align="center">
   <img
-    src="docs/assets/gnn4foa-demo.gif"
+    src="GNN4FOA_studio_README.gif"
     alt="GNN4FOA - Real-time 6DoF spatial audio rendering through a virtual acoustic twin"
     width="900"
   />
